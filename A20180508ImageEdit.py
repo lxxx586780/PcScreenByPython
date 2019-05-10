@@ -52,5 +52,3 @@ if __name__ == '__main__':
     compress_image(os.getcwd()+'\\'+'haha.jpg')
     resize_image(os.getcwd()+'\\'+'haha.jpg')
     #这是测试用例
-    
-  
