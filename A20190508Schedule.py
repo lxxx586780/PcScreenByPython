@@ -1,6 +1,7 @@
 import A20190506email
 import A20190508email
 import A20180508ImageEdit
+import WeChatFind
 import schedule
 import time
 import os
@@ -10,7 +11,8 @@ def job():
     #第一步，截图（获取time和设置照片名字）
     TimeName=time.strftime("%Y%m%d_%H-%M-%S", time.localtime()) #命名问题，windows文件名不能出现“:”
     picName=TimeName+' '+os.environ['COMPUTERNAME']+'.jpg'
-    A20190508email.window_capture(picName)
+
+    A20190508email.window_capture(picName,WeChatFind.getWechatWindow())
     #第二步，调整图片
     A20180508ImageEdit.compress_image(os.getcwd()+'\\'+picName)
     A20180508ImageEdit.resize_image(os.getcwd()+'\\'+picName)

@@ -3,10 +3,10 @@ import os
 import win32gui, win32ui, win32con, win32api
 #文件名不能以数字开头，不然其他py文件识别不了。
 
-def window_capture(filename):
-    hwnd = 0  # 窗口的编号，0号表示当前活跃窗口
+def window_capture(filename,hwndt):
+    #hwnd = hwndt  # 窗口的编号，0号表示当前活跃窗口
     # 根据窗口句柄获取窗口的设备上下文DC（Divice Context）
-    hwndDC = win32gui.GetWindowDC(hwnd)
+    hwndDC = win32gui.GetWindowDC(hwndt)
     # 根据窗口的DC获取mfcDC
     mfcDC = win32ui.CreateDCFromHandle(hwndDC)
     # mfcDC创建可兼容的DC
@@ -15,9 +15,14 @@ def window_capture(filename):
     saveBitMap = win32ui.CreateBitmap()
     # 获取监控器信息
     MoniterDev = win32api.EnumDisplayMonitors(None, None)
-    w = MoniterDev[0][2][2]
-    h = MoniterDev[0][2][3]
+    #w = MoniterDev[0][2][2]
+    #h = MoniterDev[0][2][3]
     # print w,h　　　#图片大小
+    #print(w,h)
+    left, top, right, bottom = win32gui.GetWindowRect(hwndt)
+    w=right-left #图片大小，宽
+    h=bottom-top #图片大小，高
+    print(w,h)
     # 为bitmap开辟空间
     saveBitMap.CreateCompatibleBitmap(mfcDC, w, h)
     # 高度saveDC，将截图保存到saveBitmap中
@@ -40,5 +45,5 @@ def window_capture(filename):
 
 if __name__ == '__main__': 
 
-    window_capture('haha.jpg')
+    window_capture('haha.jpg',197202)
     
