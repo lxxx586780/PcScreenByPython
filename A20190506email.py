@@ -62,7 +62,7 @@ class SendMail(object):
         except Exception as e:
             print('出错了。。',e)
         else:
-            print('发送成功！发送实际是：'+time.strftime("%Y%m%d_%H-%M-%S", time.localtime()))
+            print('发送成功！发送时间是：'+time.strftime("%Y%m%d_%H-%M-%S", time.localtime()))
             os.remove(self.file)
         self.smtp.quit()
 

@@ -36,6 +36,7 @@ def job():
 # schedule.every(5).to(10).days.do(job)
 # schedule.every().monday.do(job)
 # schedule.every().wednesday.at("13:15").do(job)
+
 #重复的关键词，没多少秒执行一次
 schedule.every(everyTime).seconds.do(job)
 
