@@ -2,6 +2,7 @@ import smtplib,os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import base64
+import time
 class SendMail(object):
     def __init__(self,username,passwd,recv,title,content,
                  file=None,ssl=False,
@@ -61,7 +62,7 @@ class SendMail(object):
         except Exception as e:
             print('出错了。。',e)
         else:
-            print('发送成功！')
+            print('发送成功！发送实际是：'+time.strftime("%Y%m%d_%H-%M-%S", time.localtime()))
             os.remove(self.file)
         self.smtp.quit()
 
@@ -81,5 +82,4 @@ if __name__ == '__main__':
         #授权码：mozxglabsequbifi
     )
     m.send_mail()
-
     pwd = os.getcwd()
