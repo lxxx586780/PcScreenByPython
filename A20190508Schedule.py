@@ -5,13 +5,13 @@ import WeChatFind
 import schedule
 import time
 import os
-everyTime =60 #每隔多少秒执行一次 单位：S 秒
+everyTime =60*5 #每隔多少分钟执行一次截图 单位：分钟，60*5 表示5分钟。
 picName=''
 def job():
-    #第一步，截图（获取time和设置照片名字）
+    #第一步，获取time和设置照片名字
     TimeName=time.strftime("%Y%m%d_%H-%M-%S", time.localtime()) #命名问题，windows文件名不能出现“:”
     picName=TimeName+' '+os.environ['COMPUTERNAME']+'.jpg'
-    #第1.1步，找到微信窗口是否在运行。
+    #第1.1步，找到微信窗口是否在运行，并截图
     A20190508email.window_capture(picName,WeChatFind.getWechatWindow())
     #第二步，调整图片
     A20180508ImageEdit.compress_image(os.getcwd()+'\\'+picName)
@@ -36,7 +36,9 @@ def job():
 # schedule.every(5).to(10).days.do(job)
 # schedule.every().monday.do(job)
 # schedule.every().wednesday.at("13:15").do(job)
+#重复的关键词，没多少秒执行一次
 schedule.every(everyTime).seconds.do(job)
+
 if __name__ == '__main__': 
     while True:
         schedule.run_pending()
